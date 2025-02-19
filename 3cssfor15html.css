@@ -1,0 +1,22 @@
+body {
+    background: linear-gradient(90deg, hsla(20, 89%, 89%, 1) 7%, hsla(324, 57%, 77%, 1) 55%, hsla(278, 54%, 81%, 1) 85%); 
+    text-align: center;
+    color: rgb(206, 30, 0);
+    font-family: 'Courier New', Courier, monospace;
+}
+.head {
+    background: linear-gradient(90deg, hsla(20, 89%, 89%, 1) 7%, hsla(324, 57%, 77%, 1) 55%, hsla(278, 54%, 81%, 1) 85%); 
+    text-align: center;
+    color:indigo;
+}
+.main {
+    margin: auto;
+    background: linear-gradient(90deg, hsla(20, 89%, 89%, 1) 7%, hsla(324, 57%, 77%, 1) 55%, hsla(278, 54%, 81%, 1) 85%); 
+}
+footer {
+    text-align: bottom center;
+}
+button {
+    text-align: center;
+    color: brown;
+}

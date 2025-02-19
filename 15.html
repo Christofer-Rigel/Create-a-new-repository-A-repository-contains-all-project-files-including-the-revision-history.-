@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="3cssfor15html.css">
+</head>
+<body>
+    <div class="head">
+        <h1>Welcome to PG EXTRAVERSE</h1>
+    </div>
+    <div class="main">
+        <p>Welcome to PJ EXTRAVERSE, a universe where humor reaches new lows and our laughs hit unparalleled highs. This is the realm of the Pathetic Joke Extravaganza—where no pun is too poor, no joke too juvenile, and no gag too groan-worthy.
+
+            In PJ EXTRAVERSE, we embrace the humor that makes you wince and wonder, “Did they really just say that?” We celebrate the art of cringe-worthy comedy that elicits eye-rolls and chuckles in equal measure. Here, we proudly wave the banner of the bad joke, standing as the ultimate champions of the humorous underdog.
+            
+            Imagine a place where every knock-knock joke has a home, and every pun gets its moment in the spotlight. Our universe is a haven for those who revel in the ridiculous and delight in the dreadful. We believe that the simplest jokes, the ones that make you groan in disbelief, hold a special kind of magic.
+            
+            PJ EXTRAVERSE is not just a place—it's a community of like-minded individuals who find joy in the absurd and the silly. We're a collective of jesters and jokesters, united by our love for humor that defies convention and embraces the unconventional. We thrive on the playful, the peculiar, and the perfectly pathetic.
+            
+            Our mission is to turn every cringe into a chuckle, every groan into a grin. We're here to prove that humor doesn't always have to be highbrow to be high-spirited. Whether it's a classic dad joke, a pun so pun-ishingly bad it hurts, or a one-liner that leaves you wondering why you laughed in the first place—we've got it all.
+            
+            Join us in PJ EXTRAVERSE, where the jokes are free-flowing, the laughs are never-ending, and the spirit of silliness reigns supreme. Step into our world, where we make the cringe-worthy unforgettable, and the pathetic, iconic. Ready for a laugh that’s fantastically feeble? Then you’ve found your place in PJ EXTRAVERSE!</p>
+            <section>
+                <img class="myslido" src="MEME1.jpg" style="height:500px">
+                <img class="myslido" src="MEME2ooo.webp" style="height:500px">
+                <img class="myslido" src="MEME3.jpeg" style="height:500px">                
+              </section>
+    </div>
+    <div class="footer">
+        <p>Note to self (NTS) : Its based on a youtube channel.</p>
+        <p id="chanellink"></p>
+        <button onclick="myFunction()">Click here to know the channel</button>
+        <script>
+            function myFunction() {
+                document.getElementById("chanellink").innerHTML = "https://www.youtube.com/@PG_EXTRAVERSE";
+            }
+            var myIndex = 0;
+    carousel();
+    function carousel() {
+      var i;
+      var x = document.getElementsByClassName("myslido");
+      for (i = 0  ;i < x.length; i++) {
+        x[i].style.display = "none";
+        
+      }
+      myIndex++;
+      if (myIndex > x.length) {myIndex = 1} 
+      x[myIndex-1].style.display =  "block";
+      setTimeout(carousel, 2000);
+        
+    }
+        </script>
+    </div>
+</body>
+</html>
