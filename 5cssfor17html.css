@@ -1,0 +1,30 @@
+body {
+    background: hsla(213, 62%, 45%, 1);
+
+background: linear-gradient(315deg, hsla(213, 62%, 45%, 1) 0%, hsla(203, 89%, 71%, 1) 50%, hsla(0, 0%, 96%, 1) 100%);
+
+background: -moz-linear-gradient(315deg, hsla(213, 62%, 45%, 1) 0%, hsla(203, 89%, 71%, 1) 50%, hsla(0, 0%, 96%, 1) 100%);
+
+background: -webkit-linear-gradient(315deg, hsla(213, 62%, 45%, 1) 0%, hsla(203, 89%, 71%, 1) 50%, hsla(0, 0%, 96%, 1) 100%);
+
+filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#2C6CBC", endColorstr="#71C3F7", GradientType=1 );
+}
+.myslio {
+    float:left;
+    margin-right: 15px ;
+}
+main {
+    text-align: left;
+}
+footer {
+    text-align: center;
+    background: hsla(253, 89, 46%, 1);
+
+background: linear-gradient(315deg, hsla(213, 22%, 45%, 1) 0%, hsla(203, 71%, 71%, 1) 50%, hsla(56, 100%, 96%, 1) 100%);
+
+background: -moz-linear-gradient(315deg, hsla(213, 62%, 45%, 1) 0%, hsla(203, 89%, 71%, 1) 50%, hsla(0, 0%, 96%, 1) 100%);
+
+background: -webkit-linear-gradient(315deg, hsla(213, 62%, 45%, 1) 0%, hsla(203, 89%, 71%, 1) 50%, hsla(0, 0%, 96%, 1) 100%);
+
+filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#2C6CBC", endColorstr="#71C3F7", GradientType=1 );
+}
