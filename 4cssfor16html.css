@@ -1,0 +1,21 @@
+body {
+    text-align: center;
+    background-color: darkslategray;
+    color: beige;
+
+}
+.header {
+    text-align: center;
+    color: maroon;
+    background-color: rgb(42, 82, 82);
+}
+.main {
+    background-color: seagreen;
+
+}
+footer {
+    background-color:  rgb(42, 82, 82);
+    color: maroon;
+    text-align: bottom;
+    text-align: left;
+}
