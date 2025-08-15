@@ -3,9 +3,7 @@ def checksorted(a):
     if lenght == 1 or lenght == 0:
         return True
     return a[0] <= a[1] and checksorted(a[1:])
-x = int(input("Enter array: "))
-a = x
-
+a = [1,2,3,4,5,6,7,8,9,10]
 if checksorted(a):
     print("\nYes given array is sorted")
 else:
