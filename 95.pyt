@@ -7,14 +7,14 @@ def subArraySum(arr, n, sum_):
         while j <= n:
             if curr_sum == sum_ :
                 print("Sum found beetween")
-                print("Index %d and 5 d"%(i,j-1))
+                print("Index %d and % d"%(i,j-1))
 
                 return 1
             
             if curr_sum > sum_ or j == n :
                 break
 
-            curr_sum = curr_sum + sum + arr[j]
+            curr_sum = curr_sum + arr[j]
             j += 1
 
         print("no subarray found")

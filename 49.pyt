@@ -1,8 +1,15 @@
+from datetime import datetime
 
-from time import date
-from time import hours 
-from time import minutes
-from time import seconds
-from time import miliseconds 
-from time import nanoseconds 
-print(date , hours , minutes , seconds , miliseconds , nanoseconds)
+# Get current date and time
+now = datetime.now()
+
+# Extract individual components
+date = now.date()
+hours = now.hour
+minutes = now.minute
+seconds = now.second
+milliseconds = now.microsecond // 1000  # Convert microseconds to milliseconds
+nanoseconds = now.microsecond * 1000  # Convert microseconds to nanoseconds
+
+# Print values
+print(date, hours, minutes, seconds, milliseconds, nanoseconds)
