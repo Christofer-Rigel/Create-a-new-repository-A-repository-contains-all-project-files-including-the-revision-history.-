@@ -15,11 +15,11 @@ jokes = [
     "Why did the programmer bring a suitcase to the IDE?Because he heard it supports Java packages.",
     "I wrote code while backpacking…Now its called Git commit-ment issues.",
     "Why did the developer get lost in the airport?He kept looking for the terminal but opened VS Code instead.",
-    "I asked my laptop for travel advice.It said: Try C:\ amping."
+    "I asked my laptop for travel advice.It said: Try Camping.",
     "I traveled to learn Python.Turns out the snake wasn't part of the course.",
     "A developer went on vacation.He still pushed commits.Thats the joke.",
-    "Why do programmers like traveling?Different environments."
-    "Why did the programmer delete his custom os , he accidently put a 'c' in it."
+    "Why do programmers like traveling?Different environments.",
+    "A programmer was coding C++ on a beach ...when he deleted his code since he put a c in it."
 ]
 def normalize_input(text):
     return re.sub(r"\s+", " ", text.strip().lower())
@@ -35,6 +35,22 @@ def recommend():
 def tell_joke():
     joke = random.choice(jokes)
     print(Fore.MAGENTA + f"Travel bot: HerE iS a TiP fOR yOu : {joke}")
+def Budjet_input_cheking():#This checks the users input ofr a budjet , and then uses it to cross refrence other countries travel budgets , for examply , the maldives is a high budget
+    #there is an if and else , cheking if hte user has inputed low  meduim or high , if true , it will then ask the user for the budget amount , low medium or high, else if the user has not inputed low medium or high , it will then ask the user to input a valid budjet and then call the function again
+    print(Fore.CYAN + "Travel bot: What is your budget for this trip? (low, medium, high)")
+    budget = input(Fore.YELLOW + "You: ")   
+    if budget in ["low", "medium", "high"]:
+        print(Fore.GREEN + f"Travel bot: Based on your budget of {budget}, I will recommend destinations that fit within that range.")
+        # Here you would add logic to recommend destinations based on the budget
+        if budget == "low":
+            print(Fore.GREEN + "Travel bot: For a low budget, I recommend visiting places like Thailand, Vietnam, or Portugal.")
+        elif budget == "medium":
+            print(Fore.GREEN + "Travel bot: For a medium budget, I recommend visiting places like Spain, Italy, or Greece.")
+        elif budget == "high":
+            print(Fore.GREEN + "Travel bot: For a high budget, I recommend visiting places like the Maldives, Bora Bora, or the Swiss Alps.")
+    else:
+        print(Fore.RED + "Travel bot: Please enter a valid budget (low, medium, high).")
+        Budjet_input_cheking()
 def packing_tips():
     tips = [
     "Pack light and versatile clothing to save space in your luggage.",
@@ -84,7 +100,7 @@ def packing_tips():
     "Always blame jet lag for your bad decisions.",
     "Eat dessert first. You're on vacation.",
     "Take photos, but also enjoy the moment.",
-    "A nap fixes 90% of travel problems.",
+    "A nap fixes 90 percent of travel problems.",
     "Airplane food is a mystery science experiment.",
     "If Google Maps fails, follow the person who looks confident.",
     "Never underestimate the power of snacks.",
@@ -124,20 +140,40 @@ def sos_help():
     print(Fore.RED + "Travel bot: It seems like you're in a tough spot. If you need immediate assistance, please contact local emergency services or reach out to someone you trust for help.")
 def guide_to_harsh_other_continental_laws():
     print(Fore.YELLOW + "Travel bot: When traveling to different continents, be aware of local laws and customs. Always research the destination's regulations regarding visas, cultural norms, and prohibited items to avoid any legal issues during your trip.")
+def main():#This will do all of the def dunctions like show help paking tips puns etc , to make the chatbot sequencial , it will say hello , ask your name , then do budget,,,crack a pun , show a few random tips and so forth
+    print(Fore.CYAN + "Travel bot: Hello! I'm your travel assistant. What's your name?")
+    name = input(Fore.YELLOW + "You: ")
+def Cultural_tips():#facts such as in china , a red letter is but on the ground if a family's daughter dies unmarrier , these redl etters contain money...so if you pick one up , you need to marry the dead daughters spirit.abs
+    Culture.tips = [
+    "In Japan, it's considered rude to tip at restaurants. Instead, excellent service is expected as part of the experience.",
+    "In many Middle Eastern countries, it's customary to greet with a handshake and a kiss on each cheek, but be sure to follow the lead of your host.",
+    "In India, it's common to eat with your right hand, as the left hand is considered unclean. Always use your right hand for eating and greeting.",
+    "In some cultures, such as in parts of Africa and the Middle East, it's considered disrespectful to show the soles of your feet. Be mindful of your body language when sitting or crossing your legs.",
+    "In many Latin American countries, it's common to greet with a hug or a kiss on the cheek, even in professional settings. Don't be surprised if your business meeting starts with a warm embrace!",
+    "In some cultures, such as in parts of Southeast Asia, it's customary to remove your shoes before entering someone's home. Always look for cues and follow the local customs."
+    ]
 def main():
-    print(Fore.CYAN + "Welcome to the Travel Bot! How can I assist you today?")
+    name = input(Fore.YELLOW + "Your name ( aliases are allowed ): ")
+    print(Fore.GREEN + f"Travel bot: Nice to meet you, {name}! How can I assist you with your travel plans today? (Type 'help' for options)")
     while True:
-        user_input = input(Fore.YELLOW + "You: ")
-        user_input = normalize_input(user_input)
-
-        if "recommend" in user_input:
-            recommend()
-        elif "joke" in user_input:
+        command = input(Fore.YELLOW + "You: ").strip().lower()
+        if command == "recommend":
+            recommend()   
+        elif command == "joke":
             tell_joke()
-        elif "packing tip" in user_input:
+        elif command == "packing tip":
             packing_tips()
-        elif user_input in ["exit", "quit"]:
-            print(Fore.CYAN + "Travel bot: Safe travels! Goodbye!")
+        elif command == "help":
+            show_help()
+        elif command == "sos":
+            sos_help()
+        elif command == "laws":
+            guide_to_harsh_other_continental_laws()
+        elif command == "exit":
+            print(Fore.CYAN + "Travel bot: Safe travels, goodbye!")
             break
+        elif command == "cultural tips":
+            Cultural_tips()
         else:
-            print(Fore.RED + "Travel bot: I'm sorry, I didn't understand that. Please try again or type 'help' for options.")
+            print(Fore.RED + "Travel bot: Sorry, I didn't understand that command. Type 'help' for options.")
+main()
