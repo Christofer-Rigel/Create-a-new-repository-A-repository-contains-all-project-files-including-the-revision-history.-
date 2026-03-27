@@ -59,7 +59,3 @@ def main():#this encomapsses line 5 to 40
             another_time()
     another_time()
 main()
-
-
-
-
