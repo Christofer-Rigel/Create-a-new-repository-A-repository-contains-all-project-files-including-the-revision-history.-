@@ -1,0 +1,34 @@
+import cv2
+import matplotlib.pyplot as plt
+image_path = cv2.imread('example.jpg')
+image_rgb = cv2.cvtColor(image_path, cv2.COLOR_BGR2RGB)
+height, width, _ = image_rgb.shape
+rect_width, rect1_height = 150,150
+top_left1 = (20,20)
+bottom_right1 = (top_left1[0] + rect_width, top_left1[1] + rect1_height)
+cv2.rectangle(image_rgb, top_left1, bottom_right1, (255, 0, 0), 2)
+rect2_height = 100
+top_left2 = (width - rect_width - 20, height - rect2_height - 20)
+bottom_right2 = (top_left2[0] + rect_width, top_left2[  1] + rect2_height)
+cv2.rectangle(image_rgb, top_left2, bottom_right2, (0, 255, 0), 2)
+center1_x = top_left1[0] + rect_width // 2
+center1_y = top_left1[1] + rect1_height // 2
+center2_x = top_left2[0] + rect_width // 2
+center2_y = top_left2[1] + rect2_height // 2
+cv2.circle(image_rgb, (center1_x, center1_y), 20, (255, 0, 0), -1)
+cv2.circle(image_rgb, (center2_x, center2_y), 20, (0, 255, 0), -1)
+plt.title("Image with Rectangles, with fantazy this is by definition of homo sapien terms a rectangle, any other psecies can call this..what a whoistherenow")
+cv2.line(image_rgb, (center1_x, center1_y), (center2_x, center2_y), (255, 255, 0), 2)
+font = cv2.FONT_HERSHEY_SIMPLEX
+cv2.putText(image_rgb, "Region 1", (top_left1[0], top_left1[1] - 10), font, 0.5, (255, 0, 0), 2)
+cv2.putText(image_rgb, "Region 2", (top_left2[0], top_left2[1] - 10), font, 0.5, (0, 255, 0), 2)
+cv2.putText(image_rgb, "Center 1", (center1_x - 20, center1_y - 20), font, 0.5, (255, 0, 0), 2)
+cv2.putText(image_rgb, "Center 2", (center2_x - 20, center2_y - 20), font, 0.5, (0, 255, 0), 2)
+arrow_start = (width - 50, 20)
+arrow_end = (width - 50, height - 20)
+cv2.arrowedLine(image_rgb, arrow_start, arrow_end, (255, 255, 255), 2, tipLength=0.1)
+cv2.arrowedLine(image_rgb, arrow_start, arrow_end, (255, 255, 255), 2, tipLength=0.1)
+height_label_position = (arrow_start[0] - 150, (arrow_start[1] + arrow_end[1]) // 2)
+cv2.putText(image_rgb, f'Height: {height}px', height_label_position, font, 0.8, (255, 255, 255), cv2.LINE_AA)
+plt.axis('off')
+plt.show()
