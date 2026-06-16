@@ -1,10 +1,6 @@
 import cv2
 
-face_cascade = cv2.CascadeClassifier(
-
-r"C:\Users\Aditya\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\cv2\data\haarcascade_frontalface_default.xml"
-
-)
+face_cascade = cv2.CascadeClassifier(r"C:\Users\Aditya\Desktop\HTML designs\Python_ig\ClassstuffIG\haarcascade_frontalface_default.xml")
 cap = cv2.VideoCapture(0)
 if not cap.isOpened():
     print("error:Could not open camera")
