@@ -17,6 +17,12 @@ except Exception as e:
     volume_available = False
     print(f"Volume API import error: {e}")
 
+# Type hints for constants
+if not volume_available:
+    CLSCTX_ALL: int | None = None
+    cast: callable | None = None
+    POINTER: callable | None = None
+
 Hands = mp.solutions.hands
 hands = Hands.Hands(min_detection_confidence=0.7, min_tracking_confidence=0.7)
 draw = mp.solutions.drawing_utils
@@ -25,11 +31,21 @@ TH, IX = Hands.HandLandmark.THUMB_TIP, Hands.HandLandmark.INDEX_FINGER_TIP
 volctl = None
 if volume_available:
     try:
+        # Explicitly target the active multimedia audio output device
+        from pycaw.constants import CLSCTX_ALL
+        from comtypes import GUID
+        
         devices = AudioUtilities.GetSpeakers()
-        interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
+        interface = devices.Activate(
+            IAudioEndpointVolume._iid_, CLSCTX_ALL, None
+        )
         volctl = cast(interface, POINTER(IAudioEndpointVolume))
+        
+        # Quick test: Print current volume to console on startup to verify link
+        current_vol = volctl.GetMasterVolumeLevelScalar()
+        print(f"Successfully connected to Audio. Current Vol: {int(current_vol * 100)}%")
     except Exception as e:
-        print(f"Pycaw error: {e}")
+        print(f"Pycaw initialization error: {e}")
 
 cap = cv2.VideoCapture(0)
 if not cap.isOpened():
