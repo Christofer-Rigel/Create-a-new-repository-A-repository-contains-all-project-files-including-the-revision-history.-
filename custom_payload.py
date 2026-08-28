@@ -1,0 +1,101 @@
+import time
+import requests
+from PIL import Image
+from io import BytesIO
+from config import api_key
+
+MODEL_ID = "stabilityai/stable-diffusion-3-medium-diffusers"
+# Correct Hugging Face Serverless API endpoint
+API_URL = f"https://api-inference.huggingface.co/models/{MODEL_ID}"
+HEADERS = {
+    "Authorization": f"Bearer {api_key}",
+    "Accept": "image/png",
+    "Content-Type": "application/json"
+}
+
+def _extract_err(r: requests.Response) -> str:
+    try:
+        j = r.json()
+        if isinstance(j, dict):
+            e = j.get("error")
+            if isinstance(e, dict):
+                return e.get("message") or str(j)
+            return e or str(j)
+        return str(j)
+    except Exception:
+        return (r.text or "").strip() or r.reason or "Request failed."
+
+def generate_image_from_text(prompt: str, negative_prompt: str = None) -> Image.Image:
+    """
+    Sends prompt (and optional negative prompt) to HF Inference API and returns PIL image.
+    """
+    # Build proper payloads using 'parameters' instead of 'options'
+    payloads = []
+    
+    params = {}
+    if negative_prompt:
+        params["negative_prompt"] = negative_prompt
+    
+    if params:
+        payloads.append({"inputs": prompt, "parameters": params})
+    payloads.append({"inputs": prompt})
+
+    last_err = None
+    for payload in payloads:
+        for attempt in range(3):
+            try:
+                r = requests.post(API_URL, headers=HEADERS, json=payload, timeout=120)
+            except requests.RequestException as e:
+                last_err = f"Request failed: {e}"
+                break
+
+            ct = (r.headers.get("Content-Type") or "").lower()
+            if r.status_code == 200 and ct.startswith("image/"):
+                return Image.open(BytesIO(r.content))
+
+            last_err = f"{r.status_code}: {_extract_err(r)}"
+
+            # Retries for model loading / temporary server hiccups
+            if r.status_code in (502, 503, 504):
+                time.sleep(2 * (attempt + 1))
+                continue
+            break
+
+    raise Exception(last_err or "The response is not an image. Possibly an error message.")
+
+def main():
+    print("=== Custom Payload Text-to-Image Generator ===")
+    print("Type 'exit' to quit.\n")
+
+    while True:
+        prompt = input("Enter a text prompt:\n> ").strip()
+        if prompt.lower() == "exit":
+            print("Goodbye!")
+            break
+
+        neg_prompt_input = input("Enter a negative prompt (or press Enter to skip):\n> ").strip()
+        negative_prompt = neg_prompt_input if neg_prompt_input else None
+
+        print("\nGenerating image with the following parameters:")
+        print(f" Prompt: {prompt}")
+        print(f" Negative Prompt: {negative_prompt if negative_prompt else '(None)'}")
+        print("Please wait...\n")
+
+        try:
+            image = generate_image_from_text(prompt, negative_prompt=negative_prompt)
+            image.show()
+
+            save_option = input("Do you want to save this image? (yes/no): ").strip().lower()
+            if save_option == "yes":
+                file_name = input("Enter a name for the image file (without extension): ").strip() or "generated_image"
+                file_name = "".join(c for c in file_name if c.isalnum() or c in ("_", "-")).rstrip()
+                image.save(f"{file_name}.png")
+                print(f"Image saved as {file_name}.png\n")
+
+        except Exception as e:
+            print(f"An error occurred: {e}\n")
+
+        print("-" * 70 + "\n")
+
+if __name__ == "__main__":
+    main()
